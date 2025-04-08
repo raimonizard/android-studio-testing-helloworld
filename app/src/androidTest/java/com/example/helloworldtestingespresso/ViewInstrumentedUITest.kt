@@ -46,8 +46,13 @@ class ViewInstrumentedUITest {
     fun checkInitialTextValues() {
         composeTestRule.onNodeWithTag("initialText_id").assertTextEquals("Hello !")
         composeTestRule.onNodeWithTag("outlinedTextField_id").assertTextContains("", substring = false)
+        composeTestRule.onNodeWithTag("counterText_id").assertTextEquals("0")
     }
 
+    /**
+     * Comprovem que el funcionament del TextField és correcte.
+     * @author RIS
+     */
     @Test
     fun checkOutlinedTextField(){
 
@@ -77,8 +82,15 @@ class ViewInstrumentedUITest {
         /// Comprovem el text del Composable etiquetat com a 'initialText_id' de dues maneres diferents
         composeTestRule.onNodeWithTag("initialText_id").assertTextEquals("Hello Sean!")
         composeTestRule.onNodeWithTag("initialText_id").assert(hasText(expectedText))
+
+        // Comprovem el resultat dins del composable 'counterText_id'
+        composeTestRule.onNodeWithTag("counterText_id").assertTextEquals("0")
     }
 
+    /**
+     * Comprovem que el funcionament del botó de reset és correcte.
+     * @author RIS
+     */
     @Test
     fun checkResetButton() {
         val inputText = "Espresso Test"
@@ -103,8 +115,15 @@ class ViewInstrumentedUITest {
         composeTestRule.onNodeWithTag("initialText_id").assertTextEquals("Hello !")
         composeTestRule.onNodeWithTag("outlinedTextField_id").assertTextContains("")
         composeTestRule.onNodeWithTag("outlinedTextField_id").assertTextContains("", substring = false)
+
+        // Comprovem que el composable counterText_id
+        composeTestRule.onNodeWithTag("counterText_id").assertTextEquals("0")
     }
 
+    /**
+     * Comprovem que el funcionament del botó d'increment és correcte.
+     * @author RIS
+     */
     @Test
     fun checkIncrementButton(){
         // Preparem test fent click al button:
@@ -120,6 +139,8 @@ class ViewInstrumentedUITest {
 
         // Comprovem l'efecte que ha provocat a 'outlinedTextField_id'
         composeTestRule.onNodeWithTag("outlinedTextField_id").assertTextContains("12")
-    }
 
+        // Comprovem l'efecte que ha provocat al composable 'counterText_id'
+        composeTestRule.onNodeWithTag("counterText_id").assertTextEquals("2")
+    }
 }
