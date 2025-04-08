@@ -21,9 +21,10 @@ import org.junit.Assert.*
  */
 @LargeTest
 @RunWith(AndroidJUnit4::class)
-class HelloWorldUITest {
+class ViewInstrumentedUITest {
 
     // Setting del context dels test de UI: li especifiquem quina vista volem provar 'MainActivity'
+    // @get:Rule és una anotació especial de JUnit que s’utilitza per aplicar una regla abans de cada test.
     @get:Rule
     val composeTestRule = createAndroidComposeRule<MainActivity>()
 

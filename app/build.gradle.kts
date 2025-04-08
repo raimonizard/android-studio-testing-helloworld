@@ -46,11 +46,13 @@ dependencies {
     implementation("androidx.compose.runtime:runtime-livedata")
     implementation ("androidx.compose.material3:material3")
 
-    // Espresso per testing
+    // Espresso per a test intrdumental de UI:
     androidTestImplementation("androidx.test.espresso:espresso-core")
     androidTestImplementation("androidx.test.ext:junit")
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
 
+    // Per a Unit Testing del ViewModel:
+    testImplementation("androidx.arch.core:core-testing:2.2.0")
 
     implementation("androidx.activity:activity-compose")
     implementation("androidx.compose.ui:ui")
