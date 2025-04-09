@@ -64,5 +64,5 @@ dependencies {
 ```
 
 # Screenshot
-## main branch:
-<img src="app/screenshot/MyView-testTag" alt="MyView-testTag" width="300"/>
+## MyView testTags():
+<img src="app/screenshot/MyView-testTag.png" alt="MyView-testTag" height="500"/>
