@@ -44,14 +44,17 @@ class ViewModelUnitTest {
     }
 
     /**
-     * Unit testing de l'estat inicial dels valors dels atributs del ViewModel:
-     * textValue i numberOfClicks
+     * Unit testing de l'estat inicial dels valors dels atributs del ViewModel,
+     * tal i com els inicialitza el seu constructor:
+     * textValue, numberOfClicks, checkBoxMulti, counterValue.
      * @author RIS
      */
     @Test
-    fun `initial state is empty text and zero clicks`() {
-        assertEquals("", viewModel.textValue.value)
-        assertEquals(0, viewModel.numberOfClicks.value)
+    fun initialState() {
+        assertSame("", viewModel.textValue.value)
+        assertSame(0, viewModel.numberOfClicks.value)
+        assertEquals(false, viewModel.checkBoxMulti.value)
+        assertEquals(0, viewModel.counterValue.value)
     }
 
     /**
@@ -59,7 +62,7 @@ class ViewModelUnitTest {
      * @author RIS
      */
     @Test
-    fun `setTextValue updates LiveData`() {
+    fun checkSetTextValue() {
         viewModel.setTextValue("Maria Antonia")
 
         assertEquals("Maria Antonia", viewModel.textValue.value)
@@ -70,28 +73,12 @@ class ViewModelUnitTest {
      * @author RIS
      */
     @Test
-    fun `clickIncrement increments the number of clicks`() {
+    fun checkClickIncrement() {
         viewModel.clickIncrement()
         assertEquals(1, viewModel.numberOfClicks.value)
 
         viewModel.clickIncrement()
         assertEquals(2, viewModel.numberOfClicks.value)
-    }
-
-    /**
-     * Test dels valors dels atributs 'textValue' i 'numberOfClicks' després
-     * de fer vàries accions usant els mètodes públics del ViewModel.
-     * @author RIS
-     */
-    @Test
-    fun `resetValues clears text and resets counter`() {
-        viewModel.setTextValue("Test")
-        viewModel.clickIncrement()
-        viewModel.clickIncrement()
-        viewModel.resetValues()
-
-        assertEquals("", viewModel.textValue.value)
-        assertEquals(0, viewModel.numberOfClicks.value)
     }
 
     /**
@@ -105,5 +92,25 @@ class ViewModelUnitTest {
 
         viewModel.toggleCheckBoxMulti()
         assertEquals(false, viewModel.checkBoxMulti.value)
+    }
+
+    /**
+     * Test dels valors dels atributs 'textValue' i 'numberOfClicks' després
+     * de fer vàries accions usant els mètodes públics del ViewModel.
+     * @author RIS
+     */
+    @Test
+    fun checkResetValues() {
+        viewModel.setTextValue("Test")
+        viewModel.clickIncrement()
+        viewModel.clickIncrement()
+        viewModel.updateCounterValue()
+        viewModel.toggleCheckBoxMulti()
+        viewModel.resetValues()
+
+        assertSame("", viewModel.textValue.value)
+        assertSame(0, viewModel.numberOfClicks.value)
+        assertEquals(false, viewModel.checkBoxMulti.value)
+        assertEquals(0, viewModel.counterValue.value)
     }
 }

@@ -24,8 +24,11 @@ import kotlin.concurrent.thread
 @RunWith(AndroidJUnit4::class)
 class ViewInstrumentedUITest {
 
-    // Setting del context dels test de UI: li especifiquem quina vista volem provar 'MainActivity'
-    // @get:Rule és una anotació especial de JUnit que s’utilitza per aplicar una regla abans de cada test.
+    /**
+     * Setting del context dels test de UI: li especifiquem quina vista volem provar 'MainActivity'
+     * @get:Rule és una anotació especial de JUnit que s’utilitza per aplicar una regla abans de cada test.
+     * Declarem i definim composeTestRule per a usar-lo posteriorment a la resta de tests de UI.
+     */
     @get:Rule
     val composeTestRule = createAndroidComposeRule<MainActivity>()
 

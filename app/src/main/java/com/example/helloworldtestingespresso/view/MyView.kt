@@ -23,7 +23,6 @@ import com.example.helloworldtestingespresso.viewmodel.HelloViewModel
 @Composable
 fun MyView(myViewModel: HelloViewModel, modifier: Modifier = Modifier) {
     val textValue by myViewModel.textValue.observeAsState("")
-    //val numberOfClicks by myViewModel.numberOfClicks.observeAsState(0)
     val checkBoxMulti by myViewModel.checkBoxMulti.observeAsState(false)
     val counterValue by myViewModel.counterValue.observeAsState(0)
 
@@ -78,7 +77,7 @@ fun MyView(myViewModel: HelloViewModel, modifier: Modifier = Modifier) {
         }
         item{
             LazyRow {
-                item {
+                item{
                     Button(onClick = { myViewModel.clickIncrement() },
                         modifier = Modifier
                             .testTag("incrementButton_id")
@@ -93,7 +92,6 @@ fun MyView(myViewModel: HelloViewModel, modifier: Modifier = Modifier) {
                     ) {
                         Text("Reset")
                     }
-
                 }
             }
         }

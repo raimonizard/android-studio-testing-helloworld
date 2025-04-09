@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class HelloViewModel: ViewModel {
+    // Atributs
     private val _textValue: MutableLiveData<String>
     public val textValue: LiveData<String>
 
@@ -51,15 +52,15 @@ class HelloViewModel: ViewModel {
         }
     }
 
+    fun toggleCheckBoxMulti(){
+        this._checkBoxMulti.value = !(this._checkBoxMulti.value)!!
+        updateCounterValue()
+    }
+
     fun resetValues() {
         this._textValue.value = ""
         this._numberOfClicks.value = 0
         this._checkBoxMulti.value = false
         this._counterValue.value = 0
-    }
-
-    fun toggleCheckBoxMulti(){
-        this._checkBoxMulti.value = !(this._checkBoxMulti.value)!!
-        updateCounterValue()
     }
 }
