@@ -65,4 +65,4 @@ dependencies {
 
 # Screenshot
 ## main branch:
-<img src="app/screenshot/screenshot_1.png" alt="App activity" width="300"/>
+<img src="app/screenshot/MyView-testTag" alt="App activity" width="300"/>
