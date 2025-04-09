@@ -2,10 +2,13 @@ package com.example.helloworldtestingespresso.view
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material3.Button
+import androidx.compose.material3.Checkbox
+import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -20,7 +23,9 @@ import com.example.helloworldtestingespresso.viewmodel.HelloViewModel
 @Composable
 fun MyView(myViewModel: HelloViewModel, modifier: Modifier = Modifier) {
     val textValue by myViewModel.textValue.observeAsState("")
-    val counter by myViewModel.numberOfClicks.observeAsState(0)
+    //val numberOfClicks by myViewModel.numberOfClicks.observeAsState(0)
+    val checkBoxMulti by myViewModel.checkBoxMulti.observeAsState(false)
+    val counterValue by myViewModel.counterValue.observeAsState(0)
 
     LazyColumn(modifier = modifier
         .padding(20.dp)
@@ -38,14 +43,26 @@ fun MyView(myViewModel: HelloViewModel, modifier: Modifier = Modifier) {
                         modifier = Modifier
                             .testTag("initialText_id")
                     )
-
                 }
                 item{
                     Text(
-                        text = "$counter",
+                        text = "$counterValue",
                         modifier = Modifier
                             .testTag("counterText_id"),
                         color = Color.Green
+                    )
+                }
+                item{
+                    Checkbox(
+                        checked = checkBoxMulti,
+                        onCheckedChange = {myViewModel.toggleCheckBoxMulti()}, // Invertim el valor de la variable al interactuar amb el Checkbox
+                        modifier = Modifier
+                            .fillMaxWidth(0.20f) // Fem que el component Switch sigui responsive ocupi el 40% de l'amplada del component superior
+                            .testTag("checkBoxMulti_id"),
+                        enabled = true,
+                        colors = CheckboxDefaults.colors(
+                            uncheckedColor = Color.LightGray,
+                            checkmarkColor = Color.Black)
                     )
                 }
             }
@@ -62,9 +79,7 @@ fun MyView(myViewModel: HelloViewModel, modifier: Modifier = Modifier) {
         item{
             LazyRow {
                 item {
-                    Button(onClick = { myViewModel.clickIncrement()
-                                       myViewModel.setTextValue(textValue + counter)
-                                    },
+                    Button(onClick = { myViewModel.clickIncrement() },
                         modifier = Modifier
                             .testTag("incrementButton_id")
                     ) {

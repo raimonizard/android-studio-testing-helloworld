@@ -40,43 +40,49 @@ android {
 }
 
 dependencies {
+    // Plataforma de versions Compose
     implementation(platform("androidx.compose:compose-bom:2024.04.01"))
+    implementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(platform(libs.androidx.compose.bom))
 
-    //LIVEDATA
-    implementation("androidx.compose.runtime:runtime-livedata")
-    implementation ("androidx.compose.material3:material3")
+    // ────────────────────────────────
+    // Unit Testing (JVM)
+    // ────────────────────────────────
+    testImplementation("androidx.arch.core:core-testing:2.2.0")
+    testImplementation(libs.junit)
 
-    // Espresso per a test intrdumental de UI:
+    // ────────────────────────────────
+    // Instrumental UI Testing (emulador/dispositiu)
+    // ────────────────────────────────
     androidTestImplementation("androidx.test.espresso:espresso-core")
     androidTestImplementation("androidx.test.ext:junit")
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
+    androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.ui.test.junit4)
 
-    // Per a Unit Testing del ViewModel:
-    testImplementation("androidx.arch.core:core-testing:2.2.0")
-
-    implementation("androidx.activity:activity-compose")
-    implementation("androidx.compose.ui:ui")
-    implementation("androidx.compose.material3:material3")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx")
-
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
+    // ────────────────────────────────
+    // Debug Tools (només en debug)
+    // ────────────────────────────────
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+    debugImplementation(libs.androidx.ui.tooling)
+    debugImplementation(libs.androidx.ui.test.manifest)
 
+    // ────────────────────────────────
+    // Implementació principal de l'app
+    // ────────────────────────────────
+    implementation("androidx.compose.runtime:runtime-livedata")
+    implementation("androidx.compose.material3:material3")
+    implementation("androidx.compose.ui:ui")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx")
+    implementation("androidx.activity:activity-compose")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
-    implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.ui.test.junit4)
-    debugImplementation(libs.androidx.ui.tooling)
-    debugImplementation(libs.androidx.ui.test.manifest)
 }

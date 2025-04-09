@@ -8,10 +8,10 @@
       <SelectionState runConfigName="checkIncrementButton()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="checkResetButton()">
+      <SelectionState runConfigName="ViewInstrumentedUITest">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="ViewInstrumentedUITest">
+      <SelectionState runConfigName="checkCheckBoxMulti()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>

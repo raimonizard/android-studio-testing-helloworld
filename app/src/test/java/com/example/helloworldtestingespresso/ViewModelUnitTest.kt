@@ -93,4 +93,17 @@ class ViewModelUnitTest {
         assertEquals("", viewModel.textValue.value)
         assertEquals(0, viewModel.numberOfClicks.value)
     }
+
+    /**
+     * Test del comportament del mètode toogleCheckBoxMulti() del ViewModel.
+     * @author RIS
+     */
+    @Test
+    fun checkToogleCheckBoxMulti(){
+        viewModel.toggleCheckBoxMulti()
+        assertEquals(true, viewModel.checkBoxMulti.value)
+
+        viewModel.toggleCheckBoxMulti()
+        assertEquals(false, viewModel.checkBoxMulti.value)
+    }
 }

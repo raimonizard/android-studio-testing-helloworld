@@ -10,6 +10,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 import org.junit.Assert.*
+import kotlin.concurrent.thread
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -43,10 +44,11 @@ class ViewInstrumentedUITest {
      * @author RIS
      */
     @Test
-    fun checkInitialTextValues() {
+    fun checkInitialComposableValues() {
         composeTestRule.onNodeWithTag("initialText_id").assertTextEquals("Hello !")
         composeTestRule.onNodeWithTag("outlinedTextField_id").assertTextContains("", substring = false)
         composeTestRule.onNodeWithTag("counterText_id").assertTextEquals("0")
+        composeTestRule.onNodeWithTag("checkBoxMulti_id").assertIsOff()
     }
 
     /**
@@ -95,14 +97,7 @@ class ViewInstrumentedUITest {
     fun checkResetButton() {
         val inputText = "Espresso Test"
 
-        /*
-        val viewModel = HelloViewModel()
-
-        composeTestRule.setContent {
-            MyView(myViewModel = viewModel)
-        }*/
-
-        // Escrivim text al TextField
+        // Escrivim text al OutlinedTextField
         composeTestRule.onNodeWithTag("outlinedTextField_id").performTextInput(inputText)
 
         // Comprovem que el text s'ha actualitzat
@@ -111,13 +106,16 @@ class ViewInstrumentedUITest {
         // Fem clic al botó Reset
         composeTestRule.onNodeWithTag("resetButton_id").performClick()
 
-        // Comprovem que el text ha estat esborrat
+        // Diferents maneres de comprovar que el text ha estat esborrat
         composeTestRule.onNodeWithTag("initialText_id").assertTextEquals("Hello !")
         composeTestRule.onNodeWithTag("outlinedTextField_id").assertTextContains("")
         composeTestRule.onNodeWithTag("outlinedTextField_id").assertTextContains("", substring = false)
 
-        // Comprovem que el composable counterText_id
+        // Comprovem que el composable counterText_id torna a tenir el valor inicial
         composeTestRule.onNodeWithTag("counterText_id").assertTextEquals("0")
+
+        // Comprovem que el composable checkBoxMulti_id torna a estar sense clickar
+        composeTestRule.onNodeWithTag("checkBoxMulti_id").assertIsOff()
     }
 
     /**
@@ -128,19 +126,46 @@ class ViewInstrumentedUITest {
     fun checkIncrementButton(){
         // Preparem test fent click al button:
         composeTestRule.onNodeWithTag("incrementButton_id").performClick()
-
-        // Comprovem l'efecte que ha provocat:
-        composeTestRule.onNodeWithTag("initialText_id").assertTextEquals("Hello 1!")
-
         composeTestRule.onNodeWithTag("incrementButton_id").performClick()
-
-        // Comprovem l'efecte que ha provocat a 'initialText_id'
-        composeTestRule.onNodeWithTag("initialText_id").assertTextEquals("Hello 12!")
-
-        // Comprovem l'efecte que ha provocat a 'outlinedTextField_id'
-        composeTestRule.onNodeWithTag("outlinedTextField_id").assertTextContains("12")
 
         // Comprovem l'efecte que ha provocat al composable 'counterText_id'
         composeTestRule.onNodeWithTag("counterText_id").assertTextEquals("2")
+
+        composeTestRule.onNodeWithTag("incrementButton_id").performClick()
+        composeTestRule.onNodeWithTag("incrementButton_id").performClick()
+        composeTestRule.onNodeWithTag("incrementButton_id").performClick()
+        composeTestRule.onNodeWithTag("incrementButton_id").performClick()
+
+        // Comprovem l'efecte que ha provocat al composable 'counterText_id'
+        composeTestRule.onNodeWithTag("counterText_id").assertTextEquals("6")
+    }
+
+    /**
+     * Comprovem el funcionament del CheckBox Multi
+     * @author RIS
+     */
+    @Test
+    fun checkCheckBoxMulti(){
+        // Preparem test fent click al button:
+        composeTestRule.onNodeWithTag("incrementButton_id").performClick()
+        composeTestRule.onNodeWithTag("incrementButton_id").performClick()
+        composeTestRule.onNodeWithTag("incrementButton_id").performClick()
+
+        composeTestRule.onNodeWithTag("counterText_id").assertTextEquals("3")
+
+        composeTestRule.onNodeWithTag("checkBoxMulti_id").performClick()
+        composeTestRule.onNodeWithTag("counterText_id").assertTextEquals("6")
+
+        composeTestRule.onNodeWithTag("incrementButton_id").performClick()
+        composeTestRule.onNodeWithTag("counterText_id").assertTextEquals("8")
+
+        composeTestRule.onNodeWithTag("checkBoxMulti_id").performClick()
+        composeTestRule.onNodeWithTag("counterText_id").assertTextEquals("4")
+
+        composeTestRule.onNodeWithTag("checkBoxMulti_id").performClick()
+        composeTestRule.onNodeWithTag("checkBoxMulti_id").performClick()
+        composeTestRule.onNodeWithTag("checkBoxMulti_id").performClick()
+        composeTestRule.onNodeWithTag("checkBoxMulti_id").performClick()
+        composeTestRule.onNodeWithTag("counterText_id").assertTextEquals("4")
     }
 }
