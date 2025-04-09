@@ -68,4 +68,4 @@ dependencies {
 <img src="app/screenshot/MyView-testTag.png" alt="MyView-testTag" height="500"/>
 
 ## Instrumental UI Tests:
-<img src="app/screenshot/HelloWorld-MyView-Instrumental-UI-Testing.gif" alt="HelloWorld-MyView-Instrumental-UI-Testing" height="500"/>
+<img src="app/screenshot/HelloWorld-MyView-Instrumental-UI-Testing.gif" alt="HelloWorld-MyView-Instrumental-UI-Testing" height="300"/>
